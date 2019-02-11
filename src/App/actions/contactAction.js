@@ -6,11 +6,18 @@ export const createContact = (contact) => {
       type: actionTypes.CREATE_NEW_CONTACT,
       contact: contact
     }
-  };
+};
 
 export const deleteContact = (id) => {
     return {
         type: actionTypes.REMOVE_CONTACT,
         id: id
+    }
+}
+
+export const editContact = (contact, id) => {
+    return {
+        type: actionTypes.EDIT_CONTACT,
+        payload: {contact, id}
     }
 }
