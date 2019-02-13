@@ -1,19 +1,14 @@
 import * as actionTypes from '../actions/actionType';
 let lastId = 0;
-let contacts = [];
 export default (state = [], action) => {
     switch (action.type){
       
         case actionTypes.CREATE_NEW_CONTACT:{       
-            
-           if(!contacts.includes(action.contact)){
-                console.log(contacts.includes(action.contact));
-                contacts.push(action.contact);
+        
                 return [
                     ...state,
                     {...action.contact, id: lastId++}
                 ];
-            }
         }
         
 

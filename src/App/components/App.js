@@ -11,8 +11,7 @@ export const Title = (props) =>{
 class App extends Component{
 
     constructor(props){
-        super(props);
-      
+        super(props); 
     }
 
     render() {
@@ -20,9 +19,7 @@ class App extends Component{
             <div>
                 <Title class="title_big" title ="Contact Book"></Title>
                 <h2 className="title_small">Add Contact</h2>
-                
                 <Contacts></Contacts>
-                
             </div>
         )
     }

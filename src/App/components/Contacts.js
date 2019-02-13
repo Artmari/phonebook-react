@@ -18,14 +18,24 @@ class Contacts extends Component{
         }
     }
 
-
     handleSubmit(data){
         let contact = {
           name: data.name,
           phone: data.phone,
           mail: data.mail
         }
-        this.props.createContact(contact);
+        console.log(this.props.contacts);
+        let exists = false;
+        for(let c of this.props.contacts ){
+            console.log('hello!');
+           if(c.phone === contact.phone && c.mail === contact.mail){
+                exists = true;
+                break;
+            }
+        }
+        if(!exists) {
+            this.props.createContact(contact);
+        }
     }
 
     removeContacts(e, id){
@@ -72,9 +82,11 @@ class Contacts extends Component{
             modal: false
         })
     }
+
+
     
     render(){
-      
+
         return(
             <div className="container">
                 <div>{this.openModal()}</div>
@@ -91,7 +103,7 @@ class Contacts extends Component{
                     <div className="table__hidden"></div>
                 </div> 
                 <ul className="contact__items">
-                    {this.props.contacts.map((contact, i) =>  this.showContacts(contact, i))}
+                    {this.props.contacts.map((contact, i) =>  this.showContacts(contact, i))} 
                 </ul>
             </div>
         )
