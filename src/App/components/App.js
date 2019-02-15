@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Contacts from './Contacts';
+import ReduxThunk from 'redux-thunk' 
 
 
 export const Title = (props) =>{

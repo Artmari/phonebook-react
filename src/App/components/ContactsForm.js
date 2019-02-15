@@ -65,9 +65,7 @@ class ContactsForm extends Component{
             phone: validPhone,
             mail: validMail
         }})
-        console.log(validName);
-        console.log(validMail);
-        console.log(validPhone);
+        
         if(validName && validPhone && validMail){
             
             this.props.handleSubmit(this.state.inputValues);
@@ -76,7 +74,7 @@ class ContactsForm extends Component{
     }
 
     setStyle(flag){
-        console.log(this.props);
+
         if(!flag){
             return {borderColor: 'red'};
         }
