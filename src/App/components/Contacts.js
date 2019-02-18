@@ -10,14 +10,16 @@ class Contacts extends Component{
     constructor(props){
         super(props);
 
-
-
         this.state = {
           name: '',
           phone: '',
           mail: '',
           modal: false
         }
+    }
+
+    componentWillMount(){
+        this.props.getData();
     }
 
     handleSubmit(data){
@@ -27,7 +29,7 @@ class Contacts extends Component{
           mail: data.mail
         }
 
-        let exists = false;
+        /*let exists = false;
         for(let c of this.props.contacts ){
 
            if(c.phone === contact.phone && c.mail === contact.mail){
@@ -37,13 +39,15 @@ class Contacts extends Component{
         }
         if(!exists) {
             this.props.createContact(contact);
-        }
+        }*/
         this.props.fetchData(contact);
+        this.props.getData();
     }
 
     removeContacts(e, id){
         e.preventDefault();
-        this.props.deleteContact(id);
+        this.props.deleteItem(id);
+        /*this.props.deleteContact(id);*/
     }
 
     editContacts(e, contact){
@@ -54,9 +58,6 @@ class Contacts extends Component{
         });
     }
 
-    componentWillMount(){
-        this.props.getData();
-    }
 
     showContacts(data){
         return (
@@ -76,24 +77,6 @@ class Contacts extends Component{
         )
     }
 
-    /*showContacts(data){
-        return (
-        <div key={data.id}>
-            <div className="list__container">
-                <div className="list__items">
-                    <li>{data.name}</li>
-                    <li>{data.phone}</li>
-                    <li>{data.mail}</li>
-                </div>
-                <div className="buttons__container">
-                    <button className="contact__button contact__button_remove" onClick={(e) => this.removeContacts(e, data.id)}>Remove</button>
-                    <button className="contact__button contact__button_edit" onClick={(e) => this.editContacts(e , data)}>Edit</button>
-                </div>
-            </div> 
-        </div>
-        )
-    }*/
-
     openModal(){
         if(this.state.modal){
            return <Modal
@@ -106,6 +89,7 @@ class Contacts extends Component{
         this.setState({
             modal: false
         })
+        this.props.getData();
     }
 
     render(){
@@ -128,7 +112,6 @@ class Contacts extends Component{
                 <ul className="contact__items">
                    {/* {this.props.contacts.map((contact, i) =>  this.showContacts(contact, i))} */}
                    {this.props.items.map((contact) =>  this.showContacts(contact))}  
-
                 </ul>
             </div>
         )
@@ -145,26 +128,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      createContact: contact =>  dispatch(contactAction.createContact(contact)),
-      deleteContact: id => dispatch(contactAction.deleteContact(id)),
+      //createContact: contact =>  dispatch(contactAction.createContact(contact)),
+      //deleteContact: id => dispatch(contactAction.deleteContact(id)),
       fetchData: (contact) => dispatch(contactAction.sendData(contact)),
-      getData: () => dispatch(contactAction.getData())
+      getData: () => dispatch(contactAction.getData()),
+      deleteItem: (id) => dispatch(contactAction.deleteItem(id))
     }
 };
 
-/*const mapStateToProps = (state) => {
-    return {
-        items: state.items,
-        hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
-    };
-};
- 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchData: (url, contact) => dispatch(itemsFetchData(url, contact))
-    };
-};*/
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
 
 

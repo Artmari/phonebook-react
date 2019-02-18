@@ -6,7 +6,6 @@ export class Field extends Component{
     }
 
     render(){
-
         return(
             <div className='contact__input'>
                 <input 
@@ -17,8 +16,7 @@ export class Field extends Component{
                     className='contact__field'
                     placeholder={this.props.field}
                     required
-                    />
-                     
+                    />          
             </div>
         )
     }
@@ -114,6 +112,5 @@ class ContactsForm extends Component{
         )
     }
 }
-
 
 export default ContactsForm

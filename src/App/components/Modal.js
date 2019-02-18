@@ -32,10 +32,9 @@ class Modal extends Component{
     }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
     return {
-      editContact: (contact, id) =>  dispatch(contactAction.editContact(contact, id))
+      editContact: (contact, id) =>  dispatch(contactAction.editItem(contact, id))
     }
 };
  

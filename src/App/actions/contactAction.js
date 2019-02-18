@@ -1,7 +1,7 @@
 
 import * as actionTypes from './actionType';
 
-export const createContact = (contact) => {
+/*export const createContact = (contact) => {
     return {
       type: actionTypes.CREATE_NEW_CONTACT,
       contact: contact
@@ -20,7 +20,7 @@ export const editContact = (contact, id) => {
         type: actionTypes.EDIT_CONTACT,
         payload: {contact, id}
     }
-}
+}*/
 
 export const sendContactsOnSubmit = (bool) => {
     return {
@@ -43,11 +43,27 @@ export function itemsHasErrored(bool) {
     };
 }
 
+export const deleteItemById = (id) =>{
+    return {
+        type: 'DELETE_ITEM',
+        id
+    }
+}
+
+export const editItemById = (item, id) =>{
+    return{
+        type:'EDIT_ITEM',
+        payload: {item, id}
+    }
+}
+
 // async actions return function instead objects (in usual sync actions)
 
 
 const sendDataUrl = 'http://localhost:8008/api/contact/create'
 const getDataUrl = 'http://localhost:8008/api/contact/get'
+const deleteDataUrl = 'http://localhost:8008/api/contact/delete/'
+const editDataUrl ='http://localhost:8008/api/contact/update'
 
 export function sendData(contact) {
     return (dispatch) => {
@@ -85,7 +101,6 @@ export function getData() {
         })
             .then((response) => {
                 if (!response.ok) {
-                    console.log(response);
                     throw Error(response.statusText);
                 }
 
@@ -95,6 +110,29 @@ export function getData() {
             .then((response) => response.json())
             .then((items) => dispatch(getContacts(items)))
     };
+}
+
+export function deleteItem(id){
+    return (dispatch) => {
+        dispatch(deleteItemById(id));
+
+        fetch(deleteDataUrl+id);
+    }
+}
+
+export function editItem(item) {
+    return (dispatch) =>{
+        dispatch(editItemById(item));
+
+        fetch(editDataUrl,{
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        })
+
+    }
 }
 
 
