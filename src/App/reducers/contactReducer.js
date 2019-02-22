@@ -11,7 +11,6 @@ export default (state = [], action) => {
                 ];
         }
         
-
         case actionTypes.REMOVE_CONTACT:
         return state.filter((data) => data.id !== action.id);
 

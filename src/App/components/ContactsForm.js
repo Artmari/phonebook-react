@@ -41,15 +41,12 @@ class ContactsForm extends Component{
         return isValid;
     }
 
-
-
     handleChange(fieldName,e){
       
         let s = {...this.state};
         s.inputValues[fieldName] = e.target.value; 
         this.setState(s);
     }
-
 
     handleSubmit(e){
         e.preventDefault();

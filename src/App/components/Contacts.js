@@ -5,6 +5,7 @@ import * as contactAction from '../actions/contactAction'
 import Modal from './Modal'
 
 
+
 class Contacts extends Component{
   
     constructor(props){
